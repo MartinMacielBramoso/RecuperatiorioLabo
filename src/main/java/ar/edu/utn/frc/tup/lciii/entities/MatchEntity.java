@@ -40,6 +40,10 @@ public class MatchEntity {
     @ManyToOne
     private PlayerEntity playerTwo;
 
+    @JoinColumn(name="player_three_id")
+    @ManyToOne
+    private PlayerEntity playerThree;
+
     @JoinColumn(name="next_to_play_id")
     @ManyToOne
     private PlayerEntity nextToPlay;

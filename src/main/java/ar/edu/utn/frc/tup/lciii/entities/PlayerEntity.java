@@ -1,4 +1,5 @@
 package ar.edu.utn.frc.tup.lciii.entities;
+import ar.edu.utn.frc.tup.lciii.models.PlayerStatus;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,4 +33,9 @@ public class PlayerEntity {
 
     @Column
     private BigDecimal balance;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private PlayerStatus statis;
+
 }
