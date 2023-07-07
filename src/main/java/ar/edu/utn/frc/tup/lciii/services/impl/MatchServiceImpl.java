@@ -155,11 +155,33 @@ public class MatchServiceImpl implements MatchService {
             //      5.4 - Si la respuesta es correcta (coinciden) el juego sigue y se debe actualizar
             //            la ultima carta recogida, el proximo jugador en jugar y el proximo indice de carta a recoger
             match.setNextCardIndex(match.getNextCardIndex()+1);
-            if(match.getPlayerTwo().getStatus() == PlayerStatus.)
-
-
-            match.setNextToPlay((match.getNextToPlay().equals(match.getPlayerOne())
-                    ?match.getPlayerTwo():match.getPlayerOne()));
+            if(match.getNextToPlay().equals(match.getPlayerOne())){
+                if(match.getPlayerTwo().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerTwo());
+                }
+                else-if(match.getPlayerThree().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerThree());
+                }
+            }
+            if(match.getNextToPlay().equals(match.getPlayerTwo())){
+                if(match.getPlayerThree().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerThree());
+                }
+                else-if(match.getPlayerOne().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerOne());
+                }
+            }
+            if(match.getNextToPlay().equals(match.getPlayerThree())){
+                if(match.getPlayerOne().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerOne());
+                }
+                else-if(match.getPlayerTwo().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerTwo());
+                }
+            }
+            
+            //match.setNextToPlay((match.getNextToPlay().equals(match.getPlayerOne())
+            //        ?match.getPlayerTwo():match.getPlayerOne()));                            *Codigo Viejo*
             match.setLastCard(match.getDeck().getCards().get(match.getNextCardIndex()));
         }
         //      5.5 - Si la respuesta no incorrecta (no coincide) el juego termina y se debe actualizar
@@ -169,8 +191,33 @@ public class MatchServiceImpl implements MatchService {
             match.setLastCard(match.getDeck().getCards().get(match.getNextCardIndex()));
             match.setNextCardIndex(match.getNextCardIndex()+1);
             match.setWinner(match.getNextToPlay());
-            match.setNextToPlay((match.getNextToPlay().equals(match.getPlayerOne())
-                    ?match.getPlayerTwo():match.getPlayerOne()));
+            match.getPlayer().setStatus(PlayerStatus.FUERA_JUEGO);
+            if(match.getNextToPlay().equals(match.getPlayerOne())){
+                if(match.getPlayerTwo().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerTwo());
+                }
+                else-if(match.getPlayerThree().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerThree());
+                }
+            }
+            if(match.getNextToPlay().equals(match.getPlayerTwo())){
+                if(match.getPlayerThree().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerThree());
+                }
+                else-if(match.getPlayerOne().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerOne());
+                }
+            }
+            if(match.getNextToPlay().equals(match.getPlayerThree())){
+                if(match.getPlayerOne().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerOne());
+                }
+                else-if(match.getPlayerTwo().getStatus() == PlayerStatus.EN_JUEGO){
+                    match.setNextToPlay(match.getPlayerTwo());
+                }
+            }
+            //match.setNextToPlay((match.getNextToPlay().equals(match.getPlayerOne())
+            //        ?match.getPlayerTwo():match.getPlayerOne()));
             match.setMatchStatus(MatchStatus.FINISH);
         }
         //      5.6 - Actualizar el Match
